@@ -1,0 +1,8 @@
+{
+    "UniWueLogin": {
+        "AuthenticationFail": "Shibboleth-Login failed. Contact webmaster@uni-wuerzburg.de!",
+        "DisablePasswordCheck": "Changing the password is not supported for SSO with Shibboleth.",
+        "DisablePasswordReset": "Resetting the password is not supported for SSO with Shibboleth.",
+        "NotAuthorized": "You are not authorized for this action. If you think it is a mistake, contact webmaster@uni-wuerzburg.de!"
+    }
+}

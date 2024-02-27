@@ -1,0 +1,8 @@
+{
+    "UniWueLogin": {
+        "AuthenticationFail": "Shibboleth-Login fehlgeschlagen. Kontaktieren Sie bitte webmaster@uni-wuerzburg.de!",
+        "DisablePasswordCheck": "Das Ändern des Passworts wird beim SSO mit Shibboleth nicht unterstützt.",
+        "DisablePasswordReset": "Das Resetten des Passworts wird beim SSO mit Shibboleth nicht unterstützt.",
+        "NotAuthorized": "Sie sind nicht für diese Aktion berechtigt. Wenn es sich Ihrer Meinung nach um einen Fehler handelt, kontaktieren Sie bitte webmaster@uni-wuerzburg.de!"
+    }
+}

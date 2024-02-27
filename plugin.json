@@ -8,13 +8,13 @@
     },
     "authors": [
         {
-            "name": "Matomo",
-            "email": "",
-            "homepage": ""
+            "name": "Lucas Kinne",
+            "email": "lucas.kinne@uni-wuerzburg.de",
+            "homepage": "https://go.uniwue.de/kinne"
         }
     ],
     "support": {
-        "email": "",
+        "email": "it-support@uni-wuerzburg.de",
         "issues": "",
         "forum": "",
         "irc": "",
@@ -23,7 +23,7 @@
         "docs": "",
         "rss": ""
     },
-    "homepage": "",
+    "homepage": "https://www.rz.uni-wuerzburg.de/",
     "license": "GPL v3+",
-    "keywords": []
+    "keywords": ["login", "authentication", "authorization", "SSO", "shibboleth"]
 }
