@@ -8,23 +8,21 @@
 
 namespace Piwik\Plugins\UniWueLogin;
 
+use Piwik\SettingsPiwik;
 
 /**
- * A controller lets you for example create a page that can be added to a menu. For more information read our guide
- * http://developer.piwik.org/guides/mvc-in-piwik or have a look at the our API references for controller and view:
- * http://developer.piwik.org/api-reference/Piwik/Plugin/Controller and
- * http://developer.piwik.org/api-reference/Piwik/View
+ * Contains the SLO logic.
  */
 class Controller extends \Piwik\Plugin\Controller
 {
     /**
-     * Redirect to the ShibSP for SLO and afterwards return to Matomo for ShibSP's login screen.
+     * Redirect to the ShibSP for SLO and returns to Matomo for ShibSP's login screen afterwards.
      *
      * @return never
      */
     public function logout(): never
     {
-        header('Location: /Shibboleth.sso/Logout?return=' . urlencode('https://' . $_SERVER['HTTP_HOST']));
+        header('Location: /Shibboleth.sso/Logout?return=' . urlencode(SettingsPiwik::getPiwikUrl()));
         exit();
     }
 }

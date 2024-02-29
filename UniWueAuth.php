@@ -18,6 +18,9 @@ use Piwik\Piwik;
 use Piwik\Plugins\UsersManager\API;
 use Random\Randomizer;
 
+/**
+ * Contains the authentication and authorization logic for our Shibboleth-based login.
+ */
 class UniWueAuth implements Auth
 {
     public const int PASSWORD_BYTES_LENGTH = 50;
@@ -36,6 +39,15 @@ class UniWueAuth implements Auth
 
     /* auth logic */
 
+    /**
+     * Performs the authentication and authorization of the current user by:
+     * - checking the general matomo access
+     * - synchronizing the user info from the provided CGI Env Vars from Shibboleth
+     * - sets the super user access if eligible
+     * - synchronizes the specific site accesses
+     *
+     * @return AuthResult
+     */
     public function authenticate(): AuthResult {
         $this->login = $_SERVER['uid'] ?: throw new Exception(Piwik::translate('UniWueLogin_AuthenticationFail'));
         $userGroups = explode(';', $_SERVER['groupMembership']);
@@ -50,12 +62,27 @@ class UniWueAuth implements Auth
         return new AuthResult($successCode, $this->login, $this->tokenAuth);
     }
 
+    /**
+     * Throws an exception if the user is not allowed to 
+     *
+     * @param array $userGroups
+     * @return void
+     */
     private function checkMatomoAccess(array $userGroups): void {
         if (!in_array(self::GROUP_USERS, $userGroups) && !in_array(self::GROUP_ADMINS, $userGroups)) {
             throw new Exception(Piwik::translate('UniWueLogin_NotAuthorized'));
         }
     }
 
+    /**
+     * Synchronizes the user info by creating/updating the Matomo user object with the provided
+     * CGI Env Variables from Shibboleth.
+     * 
+     * The user password is filled with a randomly generated password, because we do not have
+     * access to the user's password, but it is required by Matomo to have a password set.
+     *
+     * @return void
+     */
     private function synchronizeUserInfo(): void {
         Access::doAsSuperUser(function() {
             try {
@@ -71,6 +98,13 @@ class UniWueAuth implements Auth
         });
     }
 
+    /**
+     * Synchronizes the super user access by checking whether the user is part
+     * of the super user ldap group.
+     *
+     * @param array $userGroups
+     * @return boolean
+     */
     private function synchronizeSuperUserAccess(array $userGroups): bool {
         $hasSuperUserAccess = in_array(self::GROUP_ADMINS, $userGroups);
 
@@ -81,6 +115,12 @@ class UniWueAuth implements Auth
         return $hasSuperUserAccess;
     }
 
+    /**
+     * Synchronizes the specific site access.
+     *
+     * @param array $userGroups
+     * @return void
+     */
     private function synchronizeSiteAccess(array $userGroups): void {
         // TODO: implement ldap group site mapping
     }

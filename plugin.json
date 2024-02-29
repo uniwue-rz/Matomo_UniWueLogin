@@ -19,11 +19,11 @@
         "forum": "",
         "irc": "",
         "wiki": "",
-        "source": "",
+        "source": "https://git.rz.uni-wuerzburg.de/diffusion/MUWL/",
         "docs": "",
         "rss": ""
     },
-    "homepage": "https://www.rz.uni-wuerzburg.de/",
+    "homepage": "",
     "license": "GPL v3+",
     "keywords": ["login", "authentication", "authorization", "SSO", "shibboleth"]
 }

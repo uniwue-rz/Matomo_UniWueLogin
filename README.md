@@ -2,5 +2,5 @@
 
 ## Description
 
-Add your plugin description here.
+This plugin contains the authentication and authorization logic for the Shibboleth-based login for members of the University of Würzburg.
 
