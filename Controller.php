@@ -13,7 +13,7 @@ use Piwik\SettingsPiwik;
 /**
  * Contains the SLO logic.
  */
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Piwik\Plugins\Login\Controller
 {
     /**
      * Redirect to the ShibSP for SLO and returns to Matomo for ShibSP's login screen afterwards.
@@ -24,5 +24,18 @@ class Controller extends \Piwik\Plugin\Controller
     {
         header('Location: /Shibboleth.sso/Logout?return=' . urlencode(SettingsPiwik::getPiwikUrl()));
         exit();
+    }
+
+    /**
+     * Disables the password confirmation for admin pages.
+     * 
+     * This doesn't seem to be disabled by overriding 'Login.userRequiresPasswordConfirmation',
+     * hence this additional override.
+     *
+     * @return void
+     */
+    public function confirmPassword()
+    {
+        $this->passwordVerify->setPasswordVerifiedCorrectly();
     }
 }
