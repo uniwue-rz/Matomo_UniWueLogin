@@ -49,7 +49,11 @@ class UniWueAuth implements Auth
      * @return AuthResult
      */
     public function authenticate(): AuthResult {
-        $this->login = $_SERVER['uid'] ?: throw new Exception(Piwik::translate('UniWueLogin_AuthenticationFail'));
+        if (!isset($_SERVER['uid'])) {
+            return new AuthResult(AuthResult::FAILURE, '', '');
+        }
+        
+        $this->login = $_SERVER['uid'];
         $userGroups = explode(';', $_SERVER['groupMembership']);
 
         $this->checkMatomoAccess($userGroups);
