@@ -14,6 +14,7 @@ use Piwik\Auth;
 use Piwik\Container\StaticContainer;
 use Piwik\Piwik;
 use Piwik\Plugin;
+use Piwik\Plugin\Manager;
 use Piwik\Request;
 use Piwik\View;
 
@@ -39,6 +40,36 @@ class UniWueLogin extends Plugin
             'Login.userRequiresPasswordConfirmation' => 'disablePasswordConfirmation',
             'UsersManager.checkPassword' => 'disablePasswordCheck',
         ];
+    }
+
+    /* lifecycle */
+
+    /**
+     * Deactivate default Login plugin during activation
+     * so that only this plugin is active.
+     * 
+     * The core doesn't seem to support multiple login plugin at the same time.
+     *
+     * @return void
+     */
+    public function activate(): void
+    {
+        if (Manager::getInstance()->isPluginActivated("Login")) {
+            Manager::getInstance()->deactivatePlugin("Login");
+        }
+    }
+
+    /**
+     * Activate default Login plugin during deactivation
+     * so that a login plugin is always active.
+     *
+     * @return void
+     */
+    public function deactivate(): void
+    {
+        if (!Manager::getInstance()->isPluginActivated("Login")) {
+            Manager::getInstance()->activatePlugin("Login");
+        }
     }
 
     /* hooks */
