@@ -1,7 +1,7 @@
 {
     "name": "UniWueLogin",
     "description": "This plugin contains the authentication and authorization logic for the Shibboleth-based login for members of the University of W\u00fcrzburg.",
-    "version": "0.1.0",
+    "version": "5.0.0",
     "theme": false,
     "require": {
         "matomo": ">=5.0.2-stable,<6.0.0-b1"
