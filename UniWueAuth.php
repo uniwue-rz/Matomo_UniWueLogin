@@ -113,7 +113,11 @@ class UniWueAuth implements Auth
         $hasSuperUserAccess = in_array(self::GROUP_ADMINS, $userGroups);
 
         Access::doAsSuperUser(function() use ($hasSuperUserAccess) {
-            $this->api->setSuperUserAccess($this->login, $hasSuperUserAccess);
+            $hadSuperUserAccess = (bool)($this->api->getUser($this->login)['superuser_access'] ?? 0);
+
+            if ($hadSuperUserAccess !== $hasSuperUserAccess) {
+                $this->api->setSuperUserAccess($this->login, $hasSuperUserAccess);
+            }
         });
 
         return $hasSuperUserAccess;
