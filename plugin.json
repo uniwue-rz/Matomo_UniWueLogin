@@ -15,11 +15,11 @@
     ],
     "support": {
         "email": "it-support@uni-wuerzburg.de",
-        "issues": "",
+        "issues": "https://github.com/uniwue-rz/Matomo_UniWueLogin/issues",
         "forum": "",
         "irc": "",
         "wiki": "",
-        "source": "https://git.rz.uni-wuerzburg.de/diffusion/MUWL/",
+        "source": "https://github.com/uniwue-rz/Matomo_UniWueLogin",
         "docs": "",
         "rss": ""
     },
